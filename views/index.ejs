@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ChatApp2</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+  
+    <div id="main">
+      <button id="joinRoom" onclick="joinRoom()">
+         Join New Room
+      </button>
+      <div class="conversationArea">
+        <div class="messages"></div>
+        <div class="inputs">
+          <input type="text" placeholder="Enter a Messages">
+          <button onclick="sendMessage()">Send</button>
+        </div>
+      </div>
+    </div>
+
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+        let roomName = null;
+
+        const username = prompt("Enter Your Name")
+        console.log(username)
+
+        function joinRoom(){
+          roomName = prompt("Enter Room Name")
+          console.log(roomName)
+          socket.emit('joinRoom',roomName)
+        }
+
+        /*
+        {
+          username:Harshit,
+          msg:Heloo Bhai Kaise Hoo
+        }
+        */
+
+        function incomingMessage(message){
+          document.querySelector('.messages').innerHTML += ` <div class="msg incomingMessage">
+          <div class="username">${message.username}</div>
+          <div class="data"> ${message.msg} </div>
+        </div> `
+        }
+
+        function outGoingMessage(message){
+          document.querySelector('.messages').innerHTML += ` <div class="msg outGoingMessage">
+          <div class="username">${message.username}</div>
+          <div class="data"> ${message.msg} </div>
+        </div> `
+        }
+
+        function sendMessage(){
+          const msg = document.querySelector('input').value
+
+          const messagePacket = {
+            username: username,
+            msg: msg,
+            roomName: roomName
+          }
+
+          outGoingMessage(messagePacket)
+
+          socket.emit('sony',messagePacket)
+
+        }
+
+        socket.on('max',function(msg){
+          incomingMessage(msg)
+        })
+    </script>
+
+  </body>
+</html>

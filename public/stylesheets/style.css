@@ -1,0 +1,67 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Gilroy;
+}
+html,body{
+  height: 100%;
+  width: 100%;
+}
+#main{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.conversationArea{
+  height: 70vh;
+  width: 60vh;
+  background-color: crimson;
+}
+.messages{
+  height: calc(100% - 32px);
+  width: 100%;
+  background-color: rgb(66, 60, 60);
+  padding: 8px;
+}
+.messages .msg {
+  /* background-color: white; */
+  width: fit-content;
+  border-radius: 6px;
+  padding: 5px 15px;
+  margin-bottom: 7px;
+}
+.incomingMessage{
+  /* margin-left: auto; */
+  background-color: black;
+  color: white;
+}
+.outGoingMessage{
+  background-color: rgb(7, 151, 74);
+  color: white;
+  margin-left: auto;
+}
+.msg .username {
+  font-size: 11px;
+  opacity: 0.8;
+}
+.inputs {
+  width: 100%;
+  display: flex;
+}
+.inputs input {
+  width: 100%;
+}
+
+.inputs input,
+.inputs button{
+  height: 32px;
+  padding: 0.5rem 1rem;
+}
+#joinRoom{
+  position: absolute;
+  top: 10%;
+  left: 5%;
+}
